@@ -31,7 +31,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
               <Image
                 source={item}
                 style={{
-                  width: Dimensions.get('screen').width * 0.87,
+                  width: Dimensions.get('screen').width * 0.999,
                   height: 150,
                   borderRadius: 10,
                   marginRight: 15

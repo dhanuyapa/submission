@@ -39,7 +39,7 @@ const RootLayout = () => {
         </View>
       </Link>
 
-      <Link href="/category">
+      <Link href="/Allsubmission">
         <View style={styles.navItem}>
           
           <Text style={styles.navText}>Mnage Connections</Text>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   drawerContent: {
     flex: 1,
-    paddingTop: 50,
+   
     paddingHorizontal: 20,
   },
 });
