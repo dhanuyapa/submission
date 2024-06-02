@@ -11,6 +11,12 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      if (email === 'admin@gmail.com' && password === 'Admin') {
+        // Navigate to Allcustomer.tsx
+        router.push('/Allsubmission');
+        return; // Exit the function early
+      }
+
       const response = await axios.post('http://192.168.8.100:8000/student/loginStudent', { email, password });
 
       if (response.status === 200) {
@@ -36,6 +42,9 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
+       <View style={styles.formContainer}>
+      <Text>Login</Text>
+      
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -56,7 +65,7 @@ const Login = () => {
       </TouchableOpacity>
       <Link href="/SignUp" style={styles.link}>
         <Text style={styles.linkText}>Sign Up</Text>
-      </Link>
+      </Link></View>
     </View>
   );
 };
@@ -67,7 +76,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    marginTop: 300,
+    marginTop: 50,
+    backgroundColor:'#ebdfe1',
+   
+  },
+  formContainer: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+    alignItems: 'center',
   },
   input: {
     height: 40,

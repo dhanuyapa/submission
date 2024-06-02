@@ -65,7 +65,7 @@ const RootLayout = () => {
           <Slot />
         </View>
         <View style={styles.navbar}>
-          <Link href="/Login">
+          <Link href="/Home1">
             <View style={styles.navItem}>
               <Feather name="home" size={24} color="black" />
               <Text style={styles.navText}>Home</Text>

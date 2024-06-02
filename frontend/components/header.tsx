@@ -6,6 +6,7 @@ import logo from '../assets/images/logo.jpg';
 import { Entypo } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
+
 const Header = () => {
   return (
     <View style={styles.container}>

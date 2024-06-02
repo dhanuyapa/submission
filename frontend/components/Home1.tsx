@@ -13,7 +13,7 @@ const Home = () => {
     <View style={styles.container}>
       <View style={styles.box}>
         <Image source={hm1} style={styles.image} />
-        <Text style={{ color: 'black', fontWeight: 'bold' }}>Login</Text>
+        <Text style={{ color: 'black', fontWeight: 'bold' }}>Note</Text>
       </View>
       <View style={styles.box}>
         <Image source={hm7} style={styles.image} />
@@ -23,7 +23,7 @@ const Home = () => {
       <Link href="/Login" style={styles.link}>
           <Image source={hm3} style={styles.image} /></Link>
           <Link href="/Login" style={styles.link}>
-          <Text style={styles.linkText}>Prospect</Text>
+          <Text style={styles.linkText}>Submission</Text>
         </Link>
       </View>
       <View style={styles.box}>
