@@ -12,7 +12,7 @@ const submissionSchema = new mongoose.Schema({
     },
     scanTime: {
         type: Date,
-        default: Date.now
+        default: () => moment().tz('Asia/Colombo').toDate()
     }
 });
 

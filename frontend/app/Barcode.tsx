@@ -3,14 +3,16 @@ import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
+import moment from 'moment-timezone';
 
 export default function BarcodeScan() {
   const route = useRoute();
   const { userRegistrationNo } = route.params;
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [scannedTime, setScannedTime] = useState(null);
   const [text, setText] = useState('Not yet scanned');
-  const [loggedIn, setLoggedIn] = useState(true); // This should be managed based on your authentication logic
+  const [loggedIn, setLoggedIn] = useState(true); 
 
   const askForCameraPermission = () => {
     (async () => {
@@ -25,6 +27,7 @@ export default function BarcodeScan() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    setScannedTime(moment().tz('Asia/Colombo'));
     setText(data);
     console.log('Type: ' + type + '\nData: ' + data);
   };
@@ -38,6 +41,7 @@ export default function BarcodeScan() {
     try {
       const response = await axios.post(`http://192.168.8.100:8000/Submission/add/${userRegistrationNo}`, {
         qrCodeData: text,
+        scannedTime: scannedTime.format('YYYY-MM-DD HH:mm:ss'),
       });
       Alert.alert('Success', 'Submission added successfully');
     } catch (error) {
@@ -71,9 +75,11 @@ export default function BarcodeScan() {
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
-
       {scanned && (
         <>
+          <Text style={styles.maintext}>
+            Scan Time (Colombo Time Zone): {scannedTime ? scannedTime.format('YYYY-MM-DD HH:mm:ss') : 'Not available'}
+          </Text>
           <Button title={'Scan again?'} onPress={() => setScanned(false)} color="tomato" />
           <Button title="Submit" onPress={handleSubmit} color="blue" />
         </>

@@ -18,7 +18,7 @@ const RootLayout = () => {
         </View>
       </Link>
 
-      <Link href="/category">
+      <Link href="/Allsubmission">
         <View style={styles.navItem}>
           
           <Text style={styles.navText}>Mnage Connections</Text>

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
+import moment from 'moment-timezone';
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned');
-  const [loggedIn, setLoggedIn] = useState(true); // This should be managed based on your authentication logic
-  const [userRegistrationNo, setUserRegistrationNo] = useState('q'); // Replace with actual logged-in user registration number
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [userRegistrationNo, setUserRegistrationNo] = useState('q');
 
   const askForCameraPermission = () => {
     (async () => {
@@ -17,12 +18,10 @@ export default function App() {
     })();
   };
 
-  // Request Camera Permission
   useEffect(() => {
     askForCameraPermission();
   }, []);
 
-  // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setText(data);
@@ -35,9 +34,12 @@ export default function App() {
       return;
     }
 
+    const currentTime = moment().tz('Asia/Colombo').format('YYYY-MM-DD HH:mm:ss');
+
     try {
       const response = await axios.post(`http://192.168.8.101:8000/Submission/add/${userRegistrationNo}`, {
         qrCodeData: text,
+        scanTime: currentTime,
       });
       Alert.alert('Success', 'Submission added successfully');
     } catch (error) {
@@ -46,7 +48,6 @@ export default function App() {
     }
   };
 
-  // Check permissions and return the screens
   if (hasPermission === null) {
     return (
       <View style={styles.container}>
@@ -63,7 +64,6 @@ export default function App() {
     );
   }
 
-  // Return the View
   return (
     <View style={styles.container}>
       <View style={styles.barcodebox}>
@@ -73,6 +73,8 @@ export default function App() {
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
+
+      <Text>Current Time in Colombo: {moment().tz('Asia/Colombo').format('YYYY-MM-DD HH:mm:ss')}</Text>
 
       {scanned && (
         <>
