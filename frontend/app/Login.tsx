@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 const Login = () => {
   const router = useRouter();
@@ -54,6 +54,9 @@ const Login = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+      <Link href="/SignUp" style={styles.link}>
+        <Text style={styles.linkText}>Sign Up</Text>
+      </Link>
     </View>
   );
 };
@@ -88,6 +91,13 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  link: {
+    marginVertical: 10,
+  },
+  linkText: {
+    fontSize: 18,
+    color: 'blue',
   },
 });
 

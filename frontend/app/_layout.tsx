@@ -82,7 +82,7 @@ const RootLayout = () => {
           <Link href="/product">
             <View style={styles.navItem}>
               <Ionicons name="rocket-outline" size={24} color="black" />
-              <Text style={styles.navText}>My offers</Text>
+              <Text style={styles.navText}>My Course</Text>
             </View>
           </Link>
 
