@@ -3,7 +3,6 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
 import moment from 'moment-timezone';
 
-
 const AllSubmissions = () => {
   const [submissions, setSubmissions] = useState([]);
 
@@ -26,45 +25,46 @@ const AllSubmissions = () => {
     fetchSubmissions();
   }, []);
 
-  const renderItem = ({ item }) => (
-    
-    <View style={styles.item}>
-      
-      <Text style={styles.header}>Index No :{item.student.indexNo}</Text>
-      <View style={styles.row}>
-        <Text style={styles.label}>Student Name:</Text>
-        <Text style={styles.value}>{item.student.fname} {item.student.lname}</Text>
+  const renderItem = ({ item }) => {
+    const { student } = item;
+    return (
+      <View style={styles.item}>
+        <Text style={styles.header}>Index No :{student?.indexNo || 'N/A'}</Text>
+        <View style={styles.row}>
+          <Text style={styles.label}>Student Name:</Text>
+          <Text style={styles.value}>{student ? `${student.fname} ${student.lname}` : 'N/A'}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Academic Year:</Text>
+          <Text style={styles.value}>{student?.accYear || 'N/A'}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Registration No:</Text>
+          <Text style={styles.value}>{student?.registrationNo || 'N/A'}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Index No:</Text>
+          <Text style={styles.value}>{student?.indexNo || 'N/A'}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Phone:</Text>
+          <Text style={styles.value}>{student?.phone || 'N/A'}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.value}>{student?.email || 'N/A'}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Assignment:</Text>
+          <Text style={styles.value}>{item.qrCodeData}</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Submission Time:</Text>
+          <Text style={styles.value}>{item.scanTime}</Text>
+        </View>
       </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Academic Year:</Text>
-        <Text style={styles.value}>{item.student.accYear}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Registration No:</Text>
-        <Text style={styles.value}>{item.student.registrationNo}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Index No:</Text>
-        <Text style={styles.value}>{item.student.indexNo}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Phone:</Text>
-        <Text style={styles.value}>{item.student.phone}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Email:</Text>
-        <Text style={styles.value}>{item.student.email}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Assignment:</Text>
-        <Text style={styles.value}>{item.qrCodeData}</Text>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Submission Time:</Text>
-        <Text style={styles.value}>{item.scanTime}</Text>
-      </View>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    textAlign:"center"
+    textAlign: "center"
   },
   item: {
     backgroundColor: '#e0d5cc',
