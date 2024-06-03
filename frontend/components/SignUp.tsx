@@ -76,7 +76,7 @@ const SignUpForm = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Registration Number"
+        placeholder="Registration Number Ex:ITT2020119"
         value={formData.registrationNo}
         onChangeText={(text) => handleChange('registrationNo', text)}
       />

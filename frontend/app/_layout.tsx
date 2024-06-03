@@ -2,47 +2,44 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Link, Slot } from 'expo-router';
 import { Drawer } from 'react-native-drawer-layout';
-import { Feather, MaterialIcons, Ionicons, SimpleLineIcons } from '@expo/vector-icons';
+import { Feather, MaterialIcons, Ionicons, SimpleLineIcons, } from '@expo/vector-icons';
 import Header from '../components/header';
 import Login from '../components/Login';
+import Home1 from '../components/Home1';
+
 
 const RootLayout = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const renderDrawerContent = () => (
-    <View style={styles.drawerContent}>
-       <Link href="/Login">
+    <View style={[styles.drawerContent, styles.topGap]}>
+      <Link href="/Login">
         <View style={styles.navItem}>
-          
-          <Text style={styles.navText}>Mnage Connections</Text>
+          <Text style={styles.navText}>Manage Connections</Text>
         </View>
       </Link>
-
+  
       <Link href="/Allsubmission">
         <View style={styles.navItem}>
-          
-          <Text style={styles.navText}>Mnage Connections</Text>
+          <Text style={styles.navText}>Manage Connections</Text>
         </View>
       </Link>
-
+  
       <Link href="/category">
         <View style={styles.navItem}>
-          
-          <Text style={styles.navText}>Mnage Connections</Text>
+          <Text style={styles.navText}>Manage Connections</Text>
         </View>
       </Link>
-
+  
       <Link href="/category">
         <View style={styles.navItem}>
-          
-          <Text style={styles.navText}>Mnage Connections</Text>
+          <Text style={styles.navText}>Manage Connections</Text>
         </View>
       </Link>
-
+  
       <Link href="/Allsubmission">
         <View style={styles.navItem}>
-          
-          <Text style={styles.navText}>Mnage Connections</Text>
+          <Text style={styles.navText}>Manage Connections</Text>
         </View>
       </Link>
     </View>
@@ -81,7 +78,7 @@ const RootLayout = () => {
 
           <Link href="/product">
             <View style={styles.navItem}>
-              <Ionicons name="rocket-outline" size={24} color="black" />
+            <MaterialIcons name="library-books" size={24} color="black" />
               <Text style={styles.navText}>My Course</Text>
             </View>
           </Link>
@@ -136,8 +133,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: 250,
   },
+  topGap: {
+    marginTop: 50, // adjust the value as needed
+  },
   drawerContent: {
     flex: 1,
+    
    
     paddingHorizontal: 20,
   },

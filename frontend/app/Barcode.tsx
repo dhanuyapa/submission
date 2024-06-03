@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Alert } from 'react-native';
+import { Text, View, StyleSheet, Button, Alert ,TouchableOpacity} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
@@ -12,7 +12,7 @@ export default function BarcodeScan() {
   const [scanned, setScanned] = useState(false);
   const [scannedTime, setScannedTime] = useState(null);
   const [text, setText] = useState('Not yet scanned');
-  const [loggedIn, setLoggedIn] = useState(true); 
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -39,14 +39,28 @@ export default function BarcodeScan() {
     }
 
     try {
-      const response = await axios.post(`http://192.168.8.100:8000/Submission/add/${userRegistrationNo}`, {
+      const response = await axios.post(`http://192.168.8.101:8000/Submission/add/${userRegistrationNo}`, {
         qrCodeData: text,
         scannedTime: scannedTime.format('YYYY-MM-DD HH:mm:ss'),
       });
       Alert.alert('Success', 'Submission added successfully');
     } catch (error) {
-      console.error(error);
-      Alert.alert('Error', 'Failed to add submission');
+      console.error('Submission Error:', error);
+      if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+        Alert.alert('Error', `Failed to add submission: ${error.response.data.message || 'Server error'}`);
+      } else if (error.request) {
+        // Request was made but no response was received
+        console.error('Request data:', error.request);
+        Alert.alert('Error', 'Failed to add submission: No response from server');
+      } else {
+        // Something else happened in setting up the request
+        console.error('Error message:', error.message);
+        Alert.alert('Error', `Failed to add submission: ${error.message}`);
+      }
     }
   };
 
@@ -81,7 +95,11 @@ export default function BarcodeScan() {
             Scan Time (Colombo Time Zone): {scannedTime ? scannedTime.format('YYYY-MM-DD HH:mm:ss') : 'Not available'}
           </Text>
           <Button title={'Scan again?'} onPress={() => setScanned(false)} color="tomato" />
-          <Button title="Submit" onPress={handleSubmit} color="blue" />
+
+          <TouchableOpacity style={styles.button2} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+          </TouchableOpacity>
+          
         </>
       )}
     </View>
@@ -107,5 +125,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',
+  },
+  button2: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 30,
+    width: '30%',
+    alignItems: 'center',
   },
 });

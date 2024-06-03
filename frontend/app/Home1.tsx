@@ -7,10 +7,13 @@ import hm4 from '../assets/images/hm4.jpg';
 import hm5 from '../assets/images/hm5.jpg'; 
 import hm6 from '../assets/images/hm6.jpg'; 
 import hm7 from '../assets/images/hm7.jpg'; 
+import fot3 from '../assets/images/fot1.jpg'; 
 import { Link } from 'expo-router';
+import Slider from '../components/slider'; 
 const Home = () => {
   return (
     <View style={styles.container}>
+       <Slider images={[ fot3]} />
       <View style={styles.box}>
         <Image source={hm1} style={styles.image} />
         <Text style={{ color: 'black', fontWeight: 'bold' }}>Note</Text>
@@ -20,8 +23,8 @@ const Home = () => {
         <Text style={{ color: 'black', fontWeight: 'bold' }}>Lecture Videos</Text>
       </View>
       <View style={styles.box}>
-      <Link href="/Login" style={styles.link}>
-          <Image source={hm3} style={styles.image} /></Link>
+      
+          <Image source={hm3} style={styles.image} />
           <Link href="/Login" style={styles.link}>
           <Text style={styles.linkText}>Submission</Text>
         </Link>
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
   link: {
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   linkText: {
     color: 'black',

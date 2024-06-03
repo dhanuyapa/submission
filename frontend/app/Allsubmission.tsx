@@ -9,7 +9,7 @@ const AllSubmissions = () => {
   useEffect(() => {
     const fetchSubmissions = async () => {
       try {
-        const response = await axios.get('http://192.168.8.100:8000/Submission/fetch');
+        const response = await axios.get('http://192.168.8.101:8000/Submission/fetch');
         const submissionsWithColomboTime = response.data.submissions.map(submission => {
           return {
             ...submission,
@@ -26,21 +26,47 @@ const AllSubmissions = () => {
   }, []);
 
   const renderItem = ({ item }) => (
+    
     <View style={styles.item}>
-      <Text style={styles.title}>Student Name: {item.student.fname} {item.student.lname}</Text>
-      <Text style={styles.subtitle}>Academic Year: {item.student.accYear}</Text>
-      <Text style={styles.subtitle}>Registration No: {item.student.registrationNo}</Text>
-      <Text style={styles.subtitle}>Index No: {item.student.indexNo}</Text>
-      <Text style={styles.subtitle}>Phone: {item.student.phone}</Text>
-      <Text style={styles.subtitle}>Email: {item.student.email}</Text>
-      <Text style={styles.subtitle}>QR Code Data: {item.qrCodeData}</Text>
-      <Text style={styles.subtitle}>Scan Time: {item.scanTime}</Text>
+      
+      <Text style={styles.header}>Index No :{item.student.indexNo}</Text>
+      <View style={styles.row}>
+        <Text style={styles.label}>Student Name:</Text>
+        <Text style={styles.value}>{item.student.fname} {item.student.lname}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Academic Year:</Text>
+        <Text style={styles.value}>{item.student.accYear}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Registration No:</Text>
+        <Text style={styles.value}>{item.student.registrationNo}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Index No:</Text>
+        <Text style={styles.value}>{item.student.indexNo}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Phone:</Text>
+        <Text style={styles.value}>{item.student.phone}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Email:</Text>
+        <Text style={styles.value}>{item.student.email}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>QR Code Data:</Text>
+        <Text style={styles.value}>{item.qrCodeData}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Scan Time:</Text>
+        <Text style={styles.value}>{item.scanTime}</Text>
+      </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>All Submissions</Text>
       <FlatList
         data={submissions}
         renderItem={renderItem}
@@ -53,25 +79,32 @@ const AllSubmissions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    textAlign:"center"
   },
   item: {
-    marginBottom: 20,
+    backgroundColor: '#e0d5cc',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
   },
-  title: {
-    fontSize: 18,
+  row: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  label: {
     fontWeight: 'bold',
+    width: '40%',
   },
-  subtitle: {
-    fontSize: 16,
-    marginLeft: 10,
+  value: {
+    flex: 1,
   },
 });
 
