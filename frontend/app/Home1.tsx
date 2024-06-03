@@ -20,7 +20,7 @@ const Home = () => {
       </View>
       <View style={styles.box}>
         <Image source={hm7} style={styles.image} />
-        <Text style={{ color: 'black', fontWeight: 'bold' }}>Lecture Videos</Text>
+        <Text style={{ color: 'black', fontWeight: 'bold' }}>Lecture Video</Text>
       </View>
       <View style={styles.box}>
       
@@ -35,7 +35,7 @@ const Home = () => {
       </View>
       <View style={styles.box}>
         <Image source={hm5} style={styles.image} />
-        <Text style={{ color: 'black', fontWeight: 'bold' }}>Past papers</Text>
+        <Text style={{ color: 'black', fontWeight: 'bold' }}>Past paper</Text>
       </View>
       <View style={styles.box}>
         <Image source={hm6} style={styles.image} />

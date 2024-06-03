@@ -20,8 +20,8 @@ const Home = () => {
         <Text style={{ color: 'black', fontWeight: 'bold' }}>Lecture Videos</Text>
       </View>
       <View style={styles.box}>
-      <Link href="/Login" style={styles.link}>
-          <Image source={hm3} style={styles.image} /></Link>
+     
+          <Image source={hm3} style={styles.image} />
           <Link href="/Login" style={styles.link}>
           <Text style={styles.linkText}>Submission</Text>
         </Link>

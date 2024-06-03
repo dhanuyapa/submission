@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
 import moment from 'moment-timezone';
 
+
 const AllSubmissions = () => {
   const [submissions, setSubmissions] = useState([]);
 
@@ -55,11 +56,11 @@ const AllSubmissions = () => {
         <Text style={styles.value}>{item.student.email}</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.label}>QR Code Data:</Text>
+        <Text style={styles.label}>Assignment:</Text>
         <Text style={styles.value}>{item.qrCodeData}</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.label}>Scan Time:</Text>
+        <Text style={styles.label}>Submission Time:</Text>
         <Text style={styles.value}>{item.scanTime}</Text>
       </View>
     </View>

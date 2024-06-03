@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 300,
-    width: 300,
+    height: 200,
+    width: 200,
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',

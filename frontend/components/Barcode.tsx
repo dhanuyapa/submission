@@ -66,12 +66,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+       <Text style={styles.text1}>Scan the QR code to verify your assignment submission</Text>
      
       <View style={styles.barcodebox}>
-      <Text style={styles.text1}>Scan the QR code to verify your assignment submission</Text>
+     
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{ height: 300, width: 300 }}
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 300,
-    width: 300,
+    height: 200,
+    width: 200,
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',
