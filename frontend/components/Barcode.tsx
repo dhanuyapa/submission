@@ -66,7 +66,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+     
       <View style={styles.barcodebox}>
+      <Text style={styles.text1}>Scan the QR code to verify your assignment submission</Text>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 400 }}
@@ -92,7 +94,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 20, // Added padding to ensure text is visible
   },
+
   maintext: {
     fontSize: 16,
     margin: 20,
@@ -105,5 +109,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',
+  },
+  text1: {
+    color: '#000000', // Black text color
+    fontSize: 14, // Font size
+    fontWeight: 'normal', // Font weight
+    marginTop: 10, // Margin top to add space from other elements
+    paddingHorizontal: 20, // Add horizontal padding for better visibility
+    textAlign: 'center', // Center the text
   },
 });

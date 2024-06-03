@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Alert ,TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, Button, Alert, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import axios from 'axios';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import moment from 'moment-timezone';
 
 export default function BarcodeScan() {
@@ -13,6 +13,7 @@ export default function BarcodeScan() {
   const [scannedTime, setScannedTime] = useState(null);
   const [text, setText] = useState('Not yet scanned');
   const [loggedIn, setLoggedIn] = useState(true);
+  const navigation = useNavigation();
 
   const askForCameraPermission = () => {
     (async () => {
@@ -44,10 +45,11 @@ export default function BarcodeScan() {
         scannedTime: scannedTime.format('YYYY-MM-DD HH:mm:ss'),
       });
       Alert.alert('Success', 'Submission added successfully');
+      navigation.navigate('Home1');
     } catch (error) {
       console.error('Submission Error:', error);
       if (error.response) {
-        // Server responded with a status other than 200 range
+        // Handle different error scenarios
         console.error('Response data:', error.response.data);
         console.error('Response status:', error.response.status);
         console.error('Response headers:', error.response.headers);
@@ -82,6 +84,7 @@ export default function BarcodeScan() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text1}>Scan the QR code to verify your assignment submission</Text>
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
@@ -97,9 +100,8 @@ export default function BarcodeScan() {
           <Button title={'Scan again?'} onPress={() => setScanned(false)} color="tomato" />
 
           <TouchableOpacity style={styles.button2} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Submit</Text>
+            <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
-          
         </>
       )}
     </View>
@@ -112,10 +114,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 10,
   },
   maintext: {
     fontSize: 16,
-    margin: 20,
+    margin: 30,
   },
   barcodebox: {
     alignItems: 'center',
@@ -125,6 +128,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',
+    margin: 20,
   },
   button2: {
     backgroundColor: 'blue',
@@ -132,5 +136,18 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '30%',
     alignItems: 'center',
+    marginTop: 15,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  text1: {
+    color: '#000000',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    paddingHorizontal: 20,
+    textAlign: 'center',
   },
 });

@@ -31,6 +31,9 @@ const styles = {
     paddingBottom: 2,
     paddingHorizontal: 20,
     paddingTop: 20,
+    borderBottomWidth: 2, // Add bottom border width
+    borderBottomColor: '#000000', // Add black bottom border color
+
     
     
   },
